@@ -14,53 +14,95 @@ import databaseTester from '../databaseTester/databaseTester'
 import Login from '../Login/Login'
 import Register from '../Register/Register'
 
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import blue from '@material-ui/core/colors/blue'
+import blueGrey from '@material-ui/core/colors/blueGrey'
+import { LinearProgress } from '@material-ui/core'
+
+// typography
+const typography = {
+  fontFamily: [
+    'Playfair Display',
+    'Open Sans',
+    '"Helvetica Neue"',
+    '"Apple Color Emoji"',
+    '"Segoe UI Emoji"',
+    '"Segoe UI Symbol"'
+  ].join(',')
+}
+
+const lightTheme = {
+  palette: {
+    primary: blue,
+    secondary: blueGrey,
+    type: 'light'
+  },
+  typography: typography
+}
+
 export default function App() {
   const firebase = useContext(FirebaseContext)
-  const [signedIn, setSignedIn] = useState(
-    firebase.auth().currentUser ? true : false
-  )
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(undefined)
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        // User is signed in.
+        console.log('%cLOGIN', 'font-size: large')
         setUser(user)
-        setSignedIn(true)
       } else {
-        // No user is signed in.
+        console.log('%cLOGOUT', 'font-size: large')
+
+        console.debug('No User Set')
         setUser(null)
-        setSignedIn(false)
       }
     })
   })
-  const handleLogout = () => {}
+  const handleLogout = () => {
+    firebase.auth().signOut()
+  }
+  const muiTheme = createMuiTheme(lightTheme)
   return (
     <>
-      <Router>
-        <Route
-          render={props => (
-            <Navbar
-              {...props}
-              signedIn={signedIn}
-              user={user}
-              handleLogout={handleLogout}
+      <ThemeProvider theme={muiTheme}>
+        <CssBaseline />
+        {user === undefined && <LinearProgress />}
+        {user !== undefined && (
+          <Router>
+            <Route
+              render={props => (
+                <Navbar
+                  {...props}
+                  user={user}
+                  signedIn={user ? true : false}
+                  handleLogout={handleLogout}
+                />
+              )}
             />
-          )}
-        />
-        {signedIn ? (
-          <Switch>
-            <Route path='/' component={HomeScreen} />
-            <Route path='/wireframe/:wireframeId' component={EditScreen} />
-            <Route path='/databaseTester' component={databaseTester} />
-          </Switch>
-        ) : (
-          <Switch>
-            <Route path='/login' component={Login} />
-            <Route path='/register' component={Register} />
-            <Redirect to='/login' />
-          </Switch>
+            {user ? (
+              <Switch>
+                <Route exact path='/' component={HomeScreen} />
+                <Route
+                  exact
+                  path='/wireframe/:wireframeId'
+                  component={EditScreen}
+                />
+                <Route
+                  exact
+                  path='/databaseTester'
+                  component={databaseTester}
+                />
+                <Redirect to='/' />
+              </Switch>
+            ) : (
+              <Switch>
+                <Route path='/login' component={Login} />
+                <Route path='/register' component={Register} />
+                <Redirect to='login' />
+              </Switch>
+            )}
+          </Router>
         )}
-      </Router>
+      </ThemeProvider>
     </>
   )
 }
