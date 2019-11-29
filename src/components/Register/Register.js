@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Button } from '@material-ui/core'
 
 import { FirebaseContext } from '../../utils/firebase'
+import { buildUser } from '../../logic/builders'
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -47,11 +48,7 @@ export default function Register({ history }) {
           .firestore()
           .collection('users')
           .doc(resp.user.uid)
-          .set({
-            firstName: firstName,
-            lastName: lastName,
-            initials: `${firstName[0]}${lastName[0]}`
-          })
+          .set(buildUser(firstName, lastName, email, [], false, resp.user.uid))
       )
       .then(() => {
         setLoading(false)
