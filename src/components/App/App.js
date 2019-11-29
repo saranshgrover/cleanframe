@@ -10,7 +10,7 @@ import { FirebaseContext } from '../../utils/firebase'
 import Navbar from '../Header/Navbar'
 import HomeScreen from '../Home/HomeScreen'
 import EditScreen from '../Edit/EditScreen'
-import databaseTester from '../databaseTester/databaseTester'
+import DatabaseTester from '../databaseTester/databaseTester'
 import Login from '../Login/Login'
 import Register from '../Register/Register'
 
@@ -47,10 +47,10 @@ export default function App() {
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        console.log('%cLOGIN', 'font-size: large')
+        console.log('%cUSER LOGGED IN', 'font-size: large')
         setUser(user)
       } else {
-        console.log('%cLOGOUT', 'font-size: large')
+        console.log('%cUSER LOGGED OUT', 'font-size: large')
 
         console.debug('No User Set')
         setUser(null)
@@ -89,7 +89,7 @@ export default function App() {
                 <Route
                   exact
                   path='/databaseTester'
-                  component={databaseTester}
+                  component={DatabaseTester}
                 />
                 <Redirect to='/' />
               </Switch>
