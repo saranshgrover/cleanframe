@@ -1,0 +1,43 @@
+{
+  "users": [
+    {
+      "first": "First Name of User",
+      "Last": "Last Name of user",
+      "email": "email address",
+      "wireframeDocument": "Document Id of wireframe collections",
+      "isAdmin": "boolean"
+    }
+  ],
+  "wireframes": [
+    {
+      "key": "Numerical integer key (used for react)",
+      "name": "Name of Wireframe",
+      "ownerFirst": "first name of Owner",
+      "ownerLast": "first name of Owner",
+      "ownerId": "documentID of Owner in users field",
+      "editing": "true if editing, false if not",
+      "selected": "int key to control that is currently selected. If none selected, -1",
+      "controls": [
+        {
+          "key": "number to represent control",
+          "type": "container|label|button|textfield",
+          "xCoordinate": "Number between 1-5000",
+          "yCoordinate": "Number between 1-5000",
+          "width": "number",
+          "height": "number",
+          "color": "hex color default: #fffff",
+          "properties": {
+            "text": "text in the control. Only available in button|textfield|label",
+            "fontColor": "hex color of text in the control. Only available in button|textfield|label",
+            "fontSize": "number size of text in the control. Only available in button|textfield|label",
+            "border": {
+              "thickness": "number between 0-10",
+              "radius": "number between 0-10",
+              "color": "hex color"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

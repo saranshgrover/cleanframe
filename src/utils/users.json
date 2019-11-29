@@ -1,0 +1,37 @@
+[
+  {
+    "first": "Guerra",
+    "last": "Cantrell",
+    "email": "guerra.cantrell@framable.com",
+    "password": "test1234",
+    "isAdmin": false
+  },
+  {
+    "first": "Albert",
+    "last": "Pearson",
+    "email": "albert.pearson@framable.com",
+    "password": "test1234",
+    "isAdmin": false
+  },
+  {
+    "first": "Reva",
+    "last": "Obrien",
+    "email": "reva.obrien@framable.com",
+    "password": "test1234",
+    "isAdmin": false
+  },
+  {
+    "first": "Paulette",
+    "last": "Schultz",
+    "email": "paulette.schultz@framable.com",
+    "password": "test1234",
+    "isAdmin": false
+  },
+  {
+    "first": "Loraine",
+    "last": "Herman",
+    "email": "loraine.herman@framable.com",
+    "password": "test1234",
+    "isAdmin": true
+  }
+]
