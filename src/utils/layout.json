@@ -15,8 +15,6 @@
       "ownerFirst": "first name of Owner",
       "ownerLast": "first name of Owner",
       "ownerId": "documentID of Owner in users field",
-      "editing": "true if editing, false if not",
-      "selected": "int key to control that is currently selected. If none selected, -1",
       "controls": [
         {
           "key": "number to represent control",
